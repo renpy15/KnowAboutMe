@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnowAboutMe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0d0d0d;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 0;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .btn {
+            padding: 12px 24px;
+            background: transparent;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(168, 85, 247, 1);
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        .profile {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+            max-width: 400px;
+            background: transparent;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: none;
+            position: relative;
+        }
+        .profile img.cover {
+            width: 100%;
+            height: -50px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid rgba(168, 85, 247, 0.7);
+            opacity: 1;
+            animation: fadeIn 1.5s ease-in-out, float 5s infinite ease-in-out;
+        }
+        .profile img.avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+            left: 38.5%;
+            transform: translate(-50%, -50%);
+            top: 150px;
+            border: 1px solid rgba(168, 85, 247, 0.7);
+            opacity: 1;
+            background: transparent;
+            animation: fadeIn 1.5s ease-in-out, float 5s infinite ease-in-out;
+        }
+        .profile .info {
+            margin-top: 50px;
+            text-align: center;
+            background: transparent;
+            animation: fadeIn 1.5s ease-in-out, float 5s infinite ease-in-out;
+        }
+        .profile h2 {
+            margin: 10px 0;
+            color: #a855f7;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+            animation: fadeIn 1.5s ease-in-out, float 5s infinite ease-in-out;
+        }
+        .social a {
+            margin: 5px;
+            display: inline-block;
+            color: #a855f7;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            opacity: 1;
+            animation: fadeIn 1.5s ease-in-out, float 5s infinite ease-in-out;
+        }
+        .social a:hover {
+            color: #d8b4fe;
+            text-shadow: 0 0 15px rgba(216, 180, 254, 1);
+        }
+        .clock {
+            font-size: 18px;
+            margin-top: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glowText {
+            0% { text-shadow: 0 0 10px rgba(168, 85, 247, 0.8); }
+            100% { text-shadow: 0 0 20px rgba(168, 85, 247, 1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <button class="btn" onclick="playAudio(); showProfile()">Click Me</button>
+        <audio id="bg-music" src="ANONA.mp3" loop></audio>
+        <div class="profile" id="profile">
+            <img class="cover" src="Cars.gif" alt="Cover">
+            <img class="avatar" src="XXX.gif" alt="Avatar">
+            <div class="info">
+                <h2>Renpy</h2>
+                <p>Web Developer | What Else?</p>
+                <div class="social">
+                    <a href="https://www.instagram.com/tapn_exclvs/" target="_blank">Instagram</a>
+                    <a href="https://github.com/renpy15" target="_blank">GitHub</a>
+                    <a href="https://x.com/renpyX" target="_blank">Twitter</a>
+                </div>
+                <div class="clock" id="clock"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showProfile() {
+            document.querySelector('.btn').style.display = 'none';
+            const profile = document.getElementById('profile');
+            profile.style.display = 'block';
+            setTimeout(() => {
+                profile.style.opacity = '1';
+                profile.style.transform = 'translateY(0)';
+            }, 100);
+        }
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+        
+        function playAudio() {
+            document.getElementById('bg-music').play();
+        }
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#a855f7" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 1.5, "random": true },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": false, "mode": "repulse" } }
+            }
+        });
+    </script>
+</body>
+</html>
